@@ -17,10 +17,6 @@ public class fileTree {
         }
     }
     private void visitFile(File thisfile){
-        /*
-        进行类型转换，并根据相应的路径mkdir
-        之后进行写操作，如果选项是pipeline，不能进行
-        recursive访问操作。
-         */
+        fileChange.xls(thisfile);
     }
 }
