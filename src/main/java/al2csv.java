@@ -103,9 +103,12 @@ public class al2csv {
                     if (Objects.equals(arguments.get(i), "-r")) continue;
                     FileList.add(new File(arguments.get(i)));
                 }
-
             }
+            fileTree tree = new fileTree(FileList);
+            tree.visit(depth);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

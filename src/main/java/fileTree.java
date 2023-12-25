@@ -1,18 +1,23 @@
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.Callable;
 
 public class fileTree {
-    File thisFile;
+    ArrayList<File> l;
+    public fileTree(ArrayList<File> ls){
+        this.l=ls;
+    }
     public void visit(int depth) throws Exception {
-        LinkedList<File> waitingList = new LinkedList<File>();
-        waitingList.addFirst(thisFile);
-        File dir = thisFile;
-        while(!waitingList.isEmpty()){
-            File cur = waitingList.removeFirst();
-            visitFile(cur);
-            if(cur.isDirectory()){
-                for(File f: Objects.requireNonNull(cur.listFiles()))waitingList.addFirst(f);
+        for(File f:this.l){
+            ArrayList<File> waitingList = new ArrayList<>();
+            waitingList.add(f);
+            while(!waitingList.isEmpty()){
+                File cur = waitingList.remove(0);
+                visitFile(cur);
+                if(cur.isDirectory()){
+                    waitingList.addAll(Arrays.asList(Objects.requireNonNull(cur.listFiles())));
+                }
             }
         }
     }
